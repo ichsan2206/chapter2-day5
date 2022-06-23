@@ -25,10 +25,11 @@ app.get('/', function(request, response){
             let  dataProjects= data.map(function(item){
                 return {
                     ...item,
-
+                    durasi: duration(item.start_date, item.end_date)
 
                 }
             })
+            console.log(dataProjects);
 
             response.render('index',{ projects: dataProjects})
         })
@@ -46,14 +47,35 @@ app.get('/myproject', function(request, response){
 })
 
 app.post('/myproject', function(request, response){
+    
     const data = request.body
-    // console.log(data);
-    const technologies = request.body.tech;
-    console.log(technologies);
+    
+    const technologies = []
+
+    if (data.node) {
+        technologies.push('node');
+    } else {
+        technologies.push('')
+    }
+    if (data.react) {
+        technologies.push('react');
+    } else {
+        technologies.push('')
+    }
+    if (data.android) {
+        technologies.push('android');
+    } else {
+        technologies.push('')
+    }
+    if (data.java) {
+        technologies.push('java');
+    } else {
+        technologies.push('')
+    }
 
     const query = `INSERT INTO public.tb_projects(
        name, start_date, end_date, description, technologies, image)
-        VALUES ( '${data.inputTitle}', '${data.startDate}', '${data.endDate}', '${data.inputDescription}','{"${technologies}"}','${data.inputImage}');`
+        VALUES ( '${data.inputTitle}', '${data.startDate}', '${data.endDate}', '${data.inputDescription}',ARRAY ['${technologies[0]}', '${technologies[1]}','${technologies[2]}', '${technologies[3]}'],'${data.inputImage}');`
 
     client.query(query, function(err, result){
         if(err) throw err
@@ -63,16 +85,18 @@ app.post('/myproject', function(request, response){
 })
 
 app.get('/detail-project/:id', function(request, response){
-   
-    let id = request.params.id
 
-    client.query(`SELECT * FROM public.tb_projects WHERE id=${id}`, function(err, result){
-        if (err) throw err
-        // console.log(result.rows[0]);
-        let data = result.rows[0]
-        // data.post_at = getFullTime(data.post_at)
-        console.log(data);
-        response.render('detail-project', data)
+    let id = request.params.id
+    
+    const query =  `SELECT * FROM public.tb_projects WHERE id=${id}`
+    client.query(query, function(err,result){
+    if(err) throw err;
+
+    const detail = result.rows[0];
+    detail.start_date = moment(detail.start_date).format('DD MMM YYYY')
+    detail.end_date = moment(detail.end_date).format('DD MMM YYYY')
+    detail.durasi = duration(detail.start_date, detail.end_date);
+    response.render("detail-project",{detailP: detail, id})
     })
 })
 
@@ -89,23 +113,51 @@ app.get('/delete-project/:id', function(request, response){
 })
 
 app.get('/update/:id', function(request, response){
-const id = request.params.id
-client.query(`SELECT * FROM public.tb_projects WHERE id=${id}`, function(err,result){
+
+    let id = request.params.id
+    const query =  `SELECT * FROM public.tb_projects WHERE id=${id}`
+    client.query(query, function(err,result){
     if(err) throw err;
 
-    let data = result.rows[0];
-    response.render("update",{project: data})
+    const dataUpdate = result.rows[0];
+    dataUpdate.start_date = moment(dataUpdate.start_date).format('YYYY-MM-DD')
+    dataUpdate.end_date = moment(dataUpdate.end_date).format('YYYY-MM-DD')
+    response.render("update",{update: dataUpdate, id})
 });
 })
 
 app.post('/update/:id', function(request, response){
-const id = request.params.id;
-data = request.body;
-const technologies = request.body.tech;
 
-const query = `UPDATE public.tb_projects
-SET name='${data.inputTitle}', start_date='${data.startDate}', end_date='${data.endDate}', description='${data.inputDescription}', technologies='{${technologies}}', image='${data.inputImage}'
-WHERE id='${id}';`
+let id = request.params.id;
+
+data = request.body;
+
+ const technologies = []
+
+    if (data.node) {
+        technologies.push('node');
+    } else {
+        technologies.push('')
+    }
+    if (data.react) {
+        technologies.push('react');
+    } else {
+        technologies.push('')
+    }
+    if (data.android) {
+        technologies.push('android');
+    } else {
+        technologies.push('')
+    }
+    if (data.java) {
+        technologies.push('java');
+    } else {
+        technologies.push('')
+    }
+
+    const query = `UPDATE tb_projects 
+    SET name = '${data.inputTitle}', start_date = '${data.startDate}', end_date = '${data.endDate}', description = '${data.inputDescription}', technologies = ARRAY ['${technologies[0]}', '${technologies[1]}','${technologies[2]}', '${technologies[3]}'], image='${data.inputImage}' 
+    WHERE id=${id};`
 
  client.query(query, function(err, result){
      if(err) throw err
@@ -120,11 +172,11 @@ app.listen(port, function(){
 
 })
 
-function duration() {
-    let startM = new Date (request.body.startDate).getMonth();
-       let endM = new Date (request.body.endDate).getMonth()
-       let startY = new Date (request.body.startDate).getFullYear();
-       let endY= new Date (request.body.endDate).getFullYear();
+function duration(startDate, endDate) {
+    let startM = new Date (startDate).getMonth();
+       let endM = new Date (endDate).getMonth()
+       let startY = new Date (startDate).getFullYear();
+       let endY= new Date (endDate).getFullYear();
        let selisihHasil = (startM+12*endY)-(endM+12*startY);
-     return Math.abs(selisihHasil);
+     return  Math.abs(selisihHasil);
 }

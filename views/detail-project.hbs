@@ -38,22 +38,22 @@
   
   <div id="project-detail" class="container-project">
     <div class="detail-page">
-        <h1 style="text-align: center;">{{this.name}}</h1>
+        <h1 style="text-align: center;">{{this.detailP.name}}</h1>
         <div class="head-detail">
-        <img src="../assets/img/{{this.img}}" class="head-detail-image">
+        <img src="../assets/img/{{this.detailP.image}}" class="head-detail-image">
         <div style="display: flex;flex-direction: column; padding-left: 50px;">
             <div class="head-detail-duration">
             <h3 style="margin-top: 0px;">Duration</h3>
-            <p><i class="fa-solid fa-calendar-days"></i> {{this.projectDate.startDate}} - {{this.projectDate.endDate}}</p>
-            <p><i class="fa-solid fa-clock"></i>  {{this.durasi}} Month</p>
+            <p><i class="fa-solid fa-calendar-days"></i> {{this.detailP.start_date}} - {{this.detailP.end_date}}</p>
+            <p><i class="fa-solid fa-clock"></i> {{this.detailP.durasi}} Month</p>
             </div>
             <div>
                 <h3">Technologies</h3>
                 <div class="head-detail-item">
-                    {{#if this.node}} <p><i class="fa-brands fa-node-js" fa-2xl></i> Node Js</p>{{/if}}
-                    {{#if this.react}} <p><i class="fa-brands fa-react" fa-2xl></i> React Js</p>{{/if}}
-                    {{#if this.android}} <p><i class="fa-brands fa-android" fa-2xl></i> Android</p>{{/if}}
-                    {{#if this.java}} <p><i class="fa-brands fa-java" fa-2xl></i> Java </p>{{/if}}  
+                    {{#if this.detailP.technologies.[0]}} <p><i class="fa-brands fa-node-js" fa-2xl></i> Node Js</p>{{/if}}
+                    {{#if this.detailP.technologies.[1]}} <p><i class="fa-brands fa-react" fa-2xl></i> React Js</p>{{/if}}
+                    {{#if this.detailP.technologies.[2]}} <p><i class="fa-brands fa-android" fa-2xl></i> Android</p>{{/if}}
+                    {{#if this.detailP.technologies.[3]}} <p><i class="fa-brands fa-java" fa-2xl></i> Java </p>{{/if}}  
                 </div> 
             </div>
         </div>
@@ -61,7 +61,7 @@
           
           <div>
           <p style="text-align: justify; font-size: large;">
-            {{this.description}}        </p>
+            {{this.detailP.description}}        </p>
         </div>
     </div>
     </div>

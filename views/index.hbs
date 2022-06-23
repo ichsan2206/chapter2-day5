@@ -80,16 +80,14 @@
                 <a href="/detail-project/{{id}}" target="_blank" style="text-decoration: none; color: black"><img src="/assets/img/{{this.img}}" alt="">
                 <div class="title">
                     <h2>{{this.name}}</a></h2>
-                    <p>Durasi: Mulai= {{this.post_at}} Selesai= {{this.end_date}}</p>
+                    <p>Durasi: {{this.durasi}} bulan</p>
                 </div>
                 <p> {{this.description}}</p>
                 <div class="tech-icon">
-                  {{#each this.technologies}}
                 {{#if this.technologies.[0]}}<i class='fa-brands fa-node-js fa-2x1'></i>{{/if}}
                 {{#if this.technologies.[1]}}<i class='fa-brands fa-react fa-2x1'></i>{{/if}}
                 {{#if this.technologies.[2]}}<i class='fa-brands fa-android fa-2x1'></i>{{/if}}
                 {{#if this.technologies.[3]}}<i class='fa-brands fa-java fa-2x1'></i>{{/if}} 
-                    {{/each}}
                 </div>
                 <div class="button-group">
                     <button type="button" onclick=""><a href="update/{{id}}" style="text-decoration: none;  color: white">edit</a></button>

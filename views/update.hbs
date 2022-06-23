@@ -34,44 +34,44 @@
 
       <div class="container-color container-fluid d-flex justify-content-center align-items-center">
         <div class="container-project-form d-flex justify-content-center align-items-center mt-2">
-            <form action="/update/{{index}}" method="POST">     
+            <form action="/update/{{id}}" method="POST">     
               <div class="mb-3">
-                <h1 class="d-flex justify-content-center mb-2 mt-2 ">ADD MY PROJECT</h1>
+                <h1 class="d-flex justify-content-center mb-2 mt-2 ">UPDATE MY PROJECT</h1>
                 <label for="input-project-name" class="form-label fw-bold">Project Name</label>
-                <input type="text" class="form-control" id="input-title" name="inputTitle" value="{{this.name}}">
+                <input type="text" class="form-control" id="input-title" name="inputTitle" value="{{update.name}}">
               </div>
               <div class="row mb-3">
                 <div class="col">
                   <label for="input-start-date" class="form-label fw-bold">Start Date</label>
-                  <input type="date" class="form-control" id="starDate" aria-label="First name" name="startDate" value="{{update.projectDate.startDate}}">
+                  <input type="date" class="form-control" id="starDate" aria-label="First name" name="startDate" value="{{update.start_date}}">
                 </div>
                 <div class="col">
                   <label for="input-end-date" class="form-label fw-bold">End Date</label>
-                  <input type="date" class="form-control" id="endDate" aria-label="Last name" name="endDate"  value="{{update.projectDate.endDate}}">
+                  <input type="date" class="form-control" id="endDate" aria-label="Last name" name="endDate"  value="{{update.end_date}}">
                 </div>
               </div>
               <div class="mb-3">
                 <label for="input-desc" class="form-label fw-bold">Description</label>
-                <textarea class="form-control" id="inputDescription" rows="3" name="inputDescription">{{update.desc}}"</textarea>
+                <textarea class="form-control" id="inputDescription" rows="3" name="inputDescription">{{update.description}}</textarea>
               </div>
               <label class="mb-3 fw-bold" for="form-check">Technologies</label> 
               <div class="row mb-3 ms-1">
               <div class="form-check col">
-                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-node-js' fa-xl></i>" id="node-js" name="cbNode"  {{#if update.node}} checked {{/if}}>
+                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-node-js' fa-xl></i>" id="node-js" name="node"  {{#if update.technologies.[0]}} checked {{/if}}>
                 <label class="form-check-label" for="node-js">
                   Node JS
                 </label> <br>
-                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-react' fa-xl></i>" id="react-js" name="cbReact"  {{#if update.react}} checked {{/if}}>
+                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-react' fa-xl></i>" id="react-js" name="react"  {{#if update.technologies.[1]}} checked {{/if}}>
                 <label class="form-check-label" for="react-js">
                   React JS
                 </label>
               </div>
               <div class="form-check col">
-                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-android'></i>" id="android" name="cbAndroid"  {{#if update.android}} checked {{/if}}>
+                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-android'></i>" id="android" name="android"  {{#if update.technologies.[2]}} checked {{/if}}>
                 <label class="form-check-label" for="android">
                   Android
                 </label><br>
-                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-java'></i>" id="java" name="cbJava" {{#if update.java}} checked {{/if}}>
+                <input class="form-check-input" type="checkbox" value="<i class='fa-brands fa-java'></i>" id="java" name="java" {{#if update.technologies.[3]}} checked {{/if}}>
                 <label class="form-check-label" for="java">
                   Java
                 </label>
@@ -82,7 +82,7 @@
                 <input class="form-control" type="file" id="inputImage" name="inputImage">
               </div>
               <div class="text-end mt-2">
-                <button class="bg-navy rounded-pill px-4 my-2 text-light " type="submit">submit</button>
+                <button class="bg-navy rounded-pill px-4 my-2 text-light " type="submit">Update</button>
               </div>
             </form>
           </div>

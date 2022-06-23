@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://kit.fontawesome.com/66d5531b7c.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/form.js"></script>
 
 </head>
 <body>
@@ -38,38 +39,39 @@
          
         <div class="container d-flex justify-content-center">
        
-        <form class="w-50">
+        <form id="form-contact" class="w-50">
             <div> <h1 class="d-flex justify-content-center mt-2">Get In Touch </h1></div> <br>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label fw-bold">Name</label>
-              <input type="input" class="form-control" id="exampleInputEmail1">
+              <input type="input" class="form-control" id="input-name">
                </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label fw-bold">Email</label>
-              <input type="input" class="form-control" id="exampleInputPassword1">
+              <input type="input" class="form-control" id="input-email">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label fw-bold">Phone Number</label>
-                <input type="input" class="form-control" id="exampleInputPassword1">
+                <input type="input" class="form-control" id="input-phone">
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label fw-bold">Subject</label>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" id="input-subject">
                     <option selected>Select</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="NodeJS">NodeJS</option>
+                    <option value="ReactJS">ReactJS</option>
+                    <option value="Andorid">Andorid</option>
+                     <option value="Java">Java</option>
                   </select>
               </div>
               <div>
                 <label for="exampleInputPassword1" class="form-label fw-bold">Your Message</label>
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" id="input-message"></textarea>
                     <label for="floatingTextarea">Comments</label>
                   </div>
               </div>
               <div class="text-end mt-2">
-              <button class="bg-navy rounded-pill px-4 my-2 text-light " type="submit"><a href="#" class="text-decoration-none text-light">submit</a></button>
+             <button class="bg-navy rounded-pill px-4 my-2 text-light " type="button" onclick="submitData(), clearButton()">Submit</button>
             </div>
           </form>
         </div>
